@@ -1,7 +1,7 @@
 import os
-from langchain.document_loaders import TextLoader
 from langchain.indexes import VectorstoreIndexCreator
-from langchain.chat_models import ChatOpenAI
+from langchain_community.document_loaders import TextLoader
+from langchain_community.chat_models import ChatOpenAI
 
 
 def ask(Question):

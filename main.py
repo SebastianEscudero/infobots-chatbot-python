@@ -3,13 +3,16 @@ import json
 import requests
 from flask import Flask, request
 from langchainBot import ask
+from dotenv import load_dotenv
+
+load_dotenv()
 
 app = Flask(__name__)
 # Access token for your app
 # (copy token from DevX getting started page
 # and save it as an environment variable)
 
-token = os.environ.get("WHATSAPP_TOKEN")
+token = os.getenv("WHATSAPP_TOKEN")
 
 
 @app.route("/", methods=["GET"])
@@ -61,10 +64,10 @@ def verificar_token():
     verifyToken = request.args.get('hub.verify_token')
     challenge = request.args.get('hub.challenge')
 
-    if verifyToken == os.environ.get("VERIFY_TOKEN") and challenge != None:
+    if verifyToken == os.getenv("VERIFY_TOKEN") and challenge != None:
       return challenge
     else:
-      return 'token incorrecto', 403
+      return f'token incorrecto {os.getenv("VERIFY_TOKEN")}', 403
   except Exception as e:
     return e, 403
 
